@@ -1,6 +1,9 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.hilt)
+//    alias(libs.plugins.kapt)
+    id(libs.plugins.kapt.get().pluginId)
 }
 
 android {
@@ -33,6 +36,12 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+    buildFeatures {
+        viewBinding = true
+        dataBinding = true
+
+    }
 }
 
 dependencies {
@@ -42,7 +51,32 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.viewbinding)
+    implementation(libs.androidx.navigation.fragment)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.android.compiler)
+
+
+    implementation(libs.retrofit)
+    implementation(libs.converter.moshi)
+    implementation(libs.converter.gson)
+    implementation(libs.adapter.rxjava2)
+    implementation(libs.logging.interceptor)
+
+    //rx
+    implementation(libs.rxandroid)
+
+
+    //navigator
+    implementation(libs.navigation.fragmen)
+    implementation(libs.navigation.navigation.ui)
 }
+
+// Allow references to generated code
+//kapt {
+//    correctErrorTypes = true
+//}
